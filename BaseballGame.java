@@ -5,10 +5,9 @@ import java.util.regex.Pattern;
 
 public class BaseballGame {
     // HashSet을 이용하여 숫자를 중복 없이 저장
-  HashSet<Integer> randomNumber = new HashSet<>();
-  List<Integer> randomNumberSet = new ArrayList<>();
-
-  // 숫자만 입력 가능하도록
+    HashSet<Integer> randomNumber = new HashSet<>();
+    List<Integer> randomNumberSet = new ArrayList<>();
+    // 숫자만 입력 가능하도록
   private static final String numberReg = "^[0-9]*$";
 
   public BaseballGame() {
@@ -22,11 +21,8 @@ public class BaseballGame {
       while(iter.hasNext()) {
         randomNumberSet.add(Integer.valueOf(iter.next().toString()));
       }
-
   }
-  public void play() throws  Exception {
-
-
+  public void play() throws Exception {
       while(true) {
           int sCount = 0;
           int bCount = 0;
@@ -34,7 +30,6 @@ public class BaseballGame {
           List<Integer> inputNumberSet = new ArrayList<>();
           Scanner sc = new Scanner(System.in);
           System.out.println("첫번째 숫자를 입력하세요.");
-
 
           String firstNum = sc.next();
           // 숫자가 아닌 입력 값
@@ -84,7 +79,7 @@ public class BaseballGame {
               System.out.println("축하합니다 모든 숫자를 맞추었습니다.");
               break;
           }
-          allCount.setCountStrike(sCount);
+          Count.setCountStrike(sCount);
           for(int i= 0; i < randomNumberSet.size(); i++) {
               for(int j = 0; j < inputNumberSet.size(); j++) {
                   if(i != j && randomNumberSet.get(i).equals(inputNumberSet.get(j))) {
@@ -94,41 +89,12 @@ public class BaseballGame {
           }
 
           oCount = oCount - bCount - sCount;
-          allCount.setCountBall(bCount);
-          allCount.setValidateInput(oCount);
+          Count.setCountBall(bCount);
+          Count.setValidateInput(oCount);
 
-          System.out.println("스트라이크 카운트 : "+ allCount.getCountStrike());
-          System.out.println("볼카운트 : "+allCount.getCountBall());
-          System.out.println("아웃 : "+allCount.isValidateInput());
+          System.out.println("스트라이크 카운트 : "+ Count.getCountStrike());
+          System.out.println("볼카운트 : "+ Count.getCountBall());
+          System.out.println("아웃 : "+ Count.isValidateInput());
           }
   }
-}
-class allCount{
-    private static int countStrike;
-    protected static int validateInput;
-    private static int countBall;
-
-    public allCount(int validateInput, int countStrike, int countBall) {
-        this.validateInput = validateInput;
-        this.countStrike = countStrike;
-        this.countBall = countBall;
-    }
-    public static int getCountStrike() {
-        return countStrike;
-    }
-    public static int getCountBall() {
-        return countBall;
-    }
-    public static int isValidateInput() {
-        return validateInput;
-    }
-    public static void setValidateInput(int oCount) {
-        validateInput = oCount;
-    }
-    public static void setCountStrike(int sCount) {
-        countStrike = sCount;
-    }
-    public static void setCountBall(int bCount) {
-        countBall = bCount;
-    }
 }
